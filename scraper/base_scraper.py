@@ -14,11 +14,9 @@ class BaseScraper:
         self.page = None
 
     def start(self):
-
         logger.info("Menjalankan Playwright...")
 
         self.playwright = sync_playwright().start()
-
         self.browser = self.playwright.chromium.launch(
             headless=HEADLESS,
             slow_mo=300
