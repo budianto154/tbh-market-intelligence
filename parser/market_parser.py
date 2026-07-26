@@ -8,6 +8,7 @@ from core.logger import logger
 class MarketParser:
 
     def parse(self, html: str):
+        print("Parsing Steam Market...")
 
         soup = BeautifulSoup(html, "lxml")
 

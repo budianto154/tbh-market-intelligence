@@ -1,5 +1,5 @@
 from database.database import SessionLocal
-from database.repository import ItemRepository
+from database.item_repository import ItemRepository
 
 
 db = SessionLocal()

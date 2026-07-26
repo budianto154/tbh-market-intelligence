@@ -1,4 +1,5 @@
 # TBH Market Intelligence
+Learning Python, Playwright, BeautifulSoup and Git
 
 Market Intelligence Tool untuk menganalisis Steam Community Market pada game **TBH: Task Bar Hero**.
 

@@ -14,3 +14,9 @@ SessionLocal = sessionmaker(
     autoflush=False,
     bind=engine
 )
+
+def init_database():
+    # Import di dalam function agar tidak terjadi circular import
+    from database.models import Base
+
+    Base.metadata.create_all(bind=engine)
