@@ -1,71 +1,149 @@
-# TBH Market Intelligence
-Learning Python, Playwright, BeautifulSoup and Git
+# 🛡️ TBH Market Intelligence
 
-Market Intelligence Tool untuk menganalisis Steam Community Market pada game **TBH: Task Bar Hero**.
+Market Intelligence tool for **Taskbar Heroes Steam Market**.
 
-## ✨ Features
+This project collects Steam Market data, stores historical snapshots into SQLite, and provides market analysis such as demand trends, price history, and profit opportunities.
 
-- Steam Community Market Scraper
-- SQLite Database
-- Historical Price Tracking
-- Demand & Supply Analysis
-- Farming Recommendation (Planned)
-- Dashboard (Planned)
-- Telegram Notification (Planned)
+> 🚧 Project Status: Under Development
 
 ---
 
-# 🛠 Tech Stack
+# Features
 
-- Python 3.13+
-- SQLAlchemy
-- SQLite
-- Playwright
-- Loguru
-- Pandas
-- Streamlit
+Current implemented features:
 
----
-
-# 📁 Project Structure
-
-```
-tbh-market-intelligence/
-│
-├── analysis/
-├── core/
-├── dashboard/
-├── data/
-├── database/
-├── logs/
-├── scheduler/
-├── scraper/
-├── tests/
-├── venv/
-│
-├── app.py
-├── config.py
-├── requirements.txt
-├── README.md
-└── .env
-```
+- ✅ Steam Market Scraper (Playwright)
+- ✅ HTML Parser (BeautifulSoup4)
+- ✅ DTO Pattern
+- ✅ Repository Pattern
+- ✅ SQLite Database
+- ✅ SQLAlchemy ORM
+- ✅ Item Repository
+- ✅ Market Snapshot Repository
+- ✅ Market Service
+- 🚧 Historical Snapshot
+- 🚧 Dashboard
+- 🚧 Market Intelligence
 
 ---
 
-# 🚀 Installation
+# Tech Stack
 
-## 1. Clone Repository
+|   Technology   |   Description   |
+|----------------|-----------------|
+| Python         | Main Programming Language |
+| Playwright     | Steam Market Scraper |
+| BeautifulSoup4 | HTML Parsing |
+| SQLAlchemy     | ORM |
+| SQLite         | Local Database |
+| Git            | Version Control |
+
+---
+
+# Roadmap
+
+## Episode 1 - Project Foundation ✅
+
+- [x] Setup Python
+- [x] Virtual Environment
+- [x] SQLite
+- [x] SQLAlchemy
+- [x] Repository Pattern
+- [x] Logger
+- [x] Playwright
+- [x] Steam Market berhasil dibuka
+
+---
+
+## Episode 2 - Data Collection 🚧
+
+### Scraper
+
+- [x] Analisis Network Request
+- [x] Ambil HTML Steam Market
+- [x] Robust Selector Strategy
+
+### Parser
+
+- [x] Parse HTML
+- [x] DTO (ItemDTO)
+- [x] Ambil daftar item Steam Market
+
+### Database
+
+- [x] ItemRepository
+- [x] MarketSnapshotRepository
+- [x] MarketService
+- [x] save_item()
+
+### Workflow
+
+- [x] Scraper → Parser
+- [ ] Parser → ItemRepository
+- [ ] ItemRepository → SnapshotRepository
+- [ ] sync_market() selesai
+
+---
+
+## Episode 3 - Historical Market Data
+
+- [ ] Snapshot Market
+- [ ] Snapshot Scheduler
+- [ ] Price History
+- [ ] Volume History
+- [ ] Historical Query
+
+---
+
+## Episode 4 - Market Intelligence
+
+- [ ] Top Demand
+- [ ] Price Trend
+- [ ] Profit Analysis
+- [ ] Arbitrage Opportunity
+- [ ] Rarity Analysis
+
+---
+
+## Episode 5 - Dashboard
+
+- [ ] Dashboard Backend
+- [ ] REST API
+- [ ] Charts
+- [ ] Search Item
+- [ ] Filter Category
+- [ ] Historical Graph
+
+---
+
+## Episode 6 - Automation
+
+- [ ] Scheduled Scraping
+- [ ] Daily Snapshot
+- [ ] Error Recovery
+- [ ] Logging Improvement
+- [ ] Export CSV
+
+---
+
+## Episode 7 - AI Market Analyst
+
+- [ ] Demand Prediction
+- [ ] Price Prediction
+- [ ] Recommendation Engine
+- [ ] AI Market Summary
+
+---
+
+# Running Project
+
+Clone repository
 
 ```bash
-git clone <repository-url>
-cd tbh-market-intelligence
+git clone https://github.com/budianto154/tbh-market-intelligence.git
 ```
 
----
-
-## 2. Create Virtual Environment
-
-Windows
+Create virtual environment
 
 ```bash
 python -m venv venv
@@ -73,124 +151,28 @@ python -m venv venv
 
 Activate
 
-```powershell
+Windows
+
+```bash
 venv\Scripts\activate
 ```
 
----
-
-## 3. Install Dependencies
+Install dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
----
-
-## 4. Install Playwright Browser
-
-**Penting!**
-
-Playwright membutuhkan browser khusus. Jalankan:
-
-```bash
-python -m playwright install
-```
-
-Jika langkah ini dilewati, akan muncul error seperti:
-
-```
-Executable doesn't exist...
-```
-
----
-
-## 5. Run Application
+Create database
 
 ```bash
 python app.py
 ```
 
----
-
-# 🧪 Running Tests
-
-Repository
+Run project
 
 ```bash
-python -m tests.test_repository
-```
-
-DTO
-
-```bash
-python -m tests.test_dto
-```
-
-Logger
-
-```bash
-python -m tests.test_logger
-```
-
-Steam Scraper
-
-```bash
-python -m tests.test_scraper
+python -m tests.test_market_service
 ```
 
 ---
-
-# 📂 Database
-
-SQLite database akan otomatis dibuat pada:
-
-```
-data/market.db
-```
-
----
-
-# 🗺 Roadmap
-
-## ✅ Episode 1 - Foundation
-
-- [x] Project Setup
-- [x] SQLite
-- [x] SQLAlchemy
-- [x] Repository Pattern
-- [x] DTO
-- [x] Logger
-- [ ] Steam Scraper
-
-## 🔜 Episode 2
-
-- Full Steam Market Scraper
-- Market Parser
-- Save to Database
-
-## 🔜 Episode 3
-
-- Demand Score
-- Supply Score
-- Price History
-- Top Material Ranking
-
-## 🔜 Episode 4
-
-- Streamlit Dashboard
-- Search Item
-- Price Graph
-- Market Trend
-
-## 🔜 Episode 5
-
-- Telegram Bot
-- Auto Notification
-- Daily Market Report
-
----
-
-# 👨‍💻 Author
-
-Mochamad Budianto
