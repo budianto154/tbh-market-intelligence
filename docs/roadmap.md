@@ -18,46 +18,76 @@
 
 ---
 
-## Episode 2 - Steam Data Collection 🟡
+## Episode 2 - Data Collection 🚧
+
+### Scraper
 - [x] Analisis Network Request
-- [x] Temukan API Internal Steam
-- [x] Ambil daftar item
-- [x] Item DTO
-- [x] Parser
-- [x] Item Repository
-- [x] Market Service
-- [ ] Market Snapshot Repository
-- [ ] Simpan snapshot market
+- [x] Ambil HTML Steam Market
+- [x] Robust Selector Strategy
+
+### Parser
+- [x] Parse HTML
+- [x] DTO (ItemDTO)
+- [x] Ambil 30 item market
+
+### Database
+- [x] ItemRepository
+- [x] MarketSnapshotRepository
+- [x] MarketService
+- [x] save_item()
+
+### Workflow
+- [x] Scraper → Parser
+- [ ] Parser → ItemRepository
+- [ ] ItemRepository → SnapshotRepository
+- [ ] sync_market() selesai
 
 ---
 
-## Episode 3 - Market Snapshot
-- [x] Parser
-- [ ] Pagination
+## Episode 3 - Historical Market Data
+
 - [ ] Snapshot Market
+- [ ] Snapshot Scheduler
 - [ ] Price History
+- [ ] Volume History
+- [ ] Historical Query
 
 ---
 
 ## Episode 4 - Market Intelligence
-- [ ] Dashboard
+
 - [ ] Top Demand
-- [ ] Top Supply
+- [ ] Price Trend
 - [ ] Profit Analysis
-- [ ] Farming Recommendation
-- [ ] SELL / HOLD Recommendation
+- [ ] Arbitrage Opportunity
+- [ ] Rarity Analysis
 
 ---
 
-## Episode 5 - Automation
-- [ ] Scheduler
-- [ ] Telegram Notification
-- [ ] Discord Notification
-- [ ] Daily Report
+## Episode 5 - Dashboard
+
+- [ ] Dashboard Backend
+- [ ] REST API
+- [ ] Charts
+- [ ] Search Item
+- [ ] Filter Category
+- [ ] Historical Graph
 
 ---
 
-## Episode 6 - AI Intelligence
-- [ ] AI Recommendation
+## Episode 6 - Automation
+
+- [ ] Scheduled Scraping
+- [ ] Daily Snapshot
+- [ ] Error Recovery
+- [ ] Logging Improvement
+- [ ] Export CSV
+
+---
+
+## Episode 7 - AI Market Analyst
+
+- [ ] Demand Prediction
+- [ ] Price Prediction
+- [ ] Recommendation Engine
 - [ ] AI Market Summary
-- [ ] AI Farming Assistant
