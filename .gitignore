@@ -21,7 +21,7 @@ __pycache__/
 playwright/.local-browsers/
 
 # Scraped HTML
-market*.html
+*.html
 
 # Database
 *.db
