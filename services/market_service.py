@@ -46,11 +46,34 @@ class MarketService:
         try:
             html = self.scraper.open_market()
             items = self.parser.parse(html)
+
+            new_item = 0
+            existing_item = 0
+
             for dto in items:
+
                 item, created = self.save_item(dto)
-                print(item.id, item.steam_name, created)
+
+                if created:
+                    new_item += 1
+                else:
+                    existing_item += 1
+
+                self.snapshot_repository.create(
+                    item_id=item.id,
+                    price=dto.price,
+                    sell_listing=dto.quantity
+                )
+
+            print("=" * 50)
+            print(f"Total Item      : {len(items)}")
+            print(f"Item Baru       : {new_item}")
+            print(f"Item Existing   : {existing_item}")
+            print("Snapshot berhasil disimpan.")
+            print("=" * 50)
 
         finally:
+
             self.scraper.stop()
 
     
