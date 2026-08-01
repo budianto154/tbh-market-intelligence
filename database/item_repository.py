@@ -43,3 +43,17 @@ class ItemRepository:
     def get_all(self):
 
         return self.db.query(Item).all()
+
+    #ngambil nama item 
+    def get_by_steam_name(
+        self,
+        steam_name: str
+    ):
+
+        return (
+            self.db.query(Item)
+            .filter(
+                Item.steam_name == steam_name
+            )
+            .first()
+        )

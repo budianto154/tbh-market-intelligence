@@ -46,3 +46,19 @@ class MarketSnapshotRepository:
             )
             .first()
         )
+
+    def get_history_by_item_id(
+        self,
+        item_id: int
+    ):
+
+        return (
+            self.db.query(MarketSnapshot)
+            .filter(
+                MarketSnapshot.item_id == item_id
+            )
+            .order_by(
+                MarketSnapshot.updated_at.asc()
+            )
+            .all()
+        )

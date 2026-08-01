@@ -76,4 +76,21 @@ class MarketService:
 
             self.scraper.stop()
 
-    
+    def get_price_history(
+        self,
+        steam_name: str
+    ):
+
+        item = self.item_repository.get_by_steam_name(
+            steam_name
+        )
+
+        if item is None:
+            return None, []
+
+        history = self.snapshot_repository.get_history_by_item_id(
+            item.id
+        )
+
+        return item, history
+        
