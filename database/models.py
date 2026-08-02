@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, UTC
 
 from sqlalchemy import Float
 from sqlalchemy import Integer
@@ -78,7 +78,7 @@ class MarketSnapshot(Base):
 
     updated_at: Mapped[datetime] = mapped_column(
         DateTime,
-        default=datetime.utcnow
+        default=lambda: datetime.now(UTC)
     )
 
     item = relationship(
