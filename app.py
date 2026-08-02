@@ -1,36 +1,44 @@
-from database.database import init_database
+from database.database import SessionLocal, init_database
+
+from database.item_repository import ItemRepository
+from database.market_snapshot_repository import MarketSnapshotRepository
+
 from scraper.steam_scraper import SteamScraper
 from parser.market_parser import MarketParser
+
+from services.market_service import MarketService
+
+from scheduler.market_scheduler import MarketScheduler
 
 
 def main():
 
-    print("=" * 40)
-    print("TBH Market Intelligence")
-    print("=" * 40)
+    print("Starting TBH Market Intelligence...")
 
+    # Database
     init_database()
+    db = SessionLocal()
 
+    # Core components
     scraper = SteamScraper()
     parser = MarketParser()
 
-    try:
-        scraper.start()
+    # Repository
+    item_repository = ItemRepository(db)
 
-        html = scraper.open_market()
+    snapshot_repository = MarketSnapshotRepository(db)
 
-        print("Scraping selesai")
+    # Service
+    market_service = MarketService(
+        scraper=scraper,
+        parser=parser,
+        item_repository=item_repository,
+        snapshot_repository=snapshot_repository
+    )
 
-        items = parser.parse(html)
-
-        print(f"Jumlah item : {len(items)}")
-
-        for item in items[:10]:
-            print(item)
-
-    finally:
-        scraper.stop()
-
+    # Scheduler
+    scheduler = MarketScheduler(market_service)
+    scheduler.start()
 
 if __name__ == "__main__":
     main()

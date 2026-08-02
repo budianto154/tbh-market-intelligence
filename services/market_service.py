@@ -43,6 +43,16 @@ class MarketService:
             existing = self.item_repository.get_by_market_hash_name(
                 dto.name
             )
+
+            if existing:
+                print(
+                    f"EXISTING : {dto.name} -> ID {existing.id}"
+                )
+
+            else:
+                print(
+                    f"NEW ITEM : {dto.name}"
+                )
     
             if existing is not None:
                 return existing, False
@@ -81,8 +91,10 @@ class MarketService:
         new_item = 0
         existing_item = 0
 
-        for dto in items:
+        snapshot_count = 0
+        snapshot_skip = 0
 
+        for dto in items:
             item, created = self.save_item(dto)
 
             if created:
@@ -90,15 +102,22 @@ class MarketService:
             else:
                 existing_item += 1
 
-            self._save_snapshot(
+            snapshot_created = self._save_snapshot(
                 item.id,
                 dto
             )
 
+            if snapshot_created:
+                snapshot_count += 1
+            else:
+                snapshot_skip += 1
+
         self._print_summary(
             len(items),
             new_item,
-            existing_item
+            existing_item,
+            snapshot_count,
+            snapshot_skip
         )
 
     def _save_snapshot(
@@ -107,17 +126,29 @@ class MarketService:
         dto: ItemDTO
     ):
 
-        self.snapshot_repository.create(
+        changed = self.snapshot_repository.is_changed(
             item_id=item_id,
             price=dto.price,
             sell_listing=dto.quantity
         )
 
+        if not changed:
+            return False
+
+        self.snapshot_repository.create(
+            item_id=item_id,
+            price=dto.price,
+            sell_listing=dto.quantity
+        )
+        return True
+
     def _print_summary(
         self,
-        total_item: int,
-        new_item: int,
-        existing_item: int
+        total_item,
+        new_item,
+        existing_item,
+        snapshot_count,
+        snapshot_skip
     ):
 
         print("=" * 60)
@@ -126,6 +157,7 @@ class MarketService:
         print(f"Total Item      : {total_item}")
         print(f"Item Baru       : {new_item}")
         print(f"Item Existing   : {existing_item}")
-        print(f"Snapshot        : {total_item}")
+        print(f"Snapshot Baru   : {snapshot_count}")
+        print(f"Snapshot Skip   : {snapshot_skip}")
         print("=" * 60)
         

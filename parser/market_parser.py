@@ -190,6 +190,17 @@ class MarketParser:
                         ""
                     )
 
+                    logger.info(
+                        f"""
+                    PRICE DEBUG
+                    NAME : {name}
+                    PRICE TEXT : {price_text}
+                    SELL : {item.get('cSellOrders')}
+                    STEAM FEE : {item.get('unSteamFee')}
+                    PUBLISHER FEE : {item.get('unPublisherFee')}
+                    """
+                    )
+
                     price = self._parse_price(
                         price_text
                     )
@@ -243,7 +254,7 @@ class MarketParser:
         # Normalisasi encoding Steam
         text = (
             text
-            .replace("Â", " ")
+            .replace("Â", "")
             .replace(" ", "")
         )
 
@@ -256,6 +267,4 @@ class MarketParser:
         if not numbers:
             return 0
 
-        return int(
-            "".join(numbers)
-        )
+        return int("".join(numbers))

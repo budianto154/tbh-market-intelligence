@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
-
 from database.models import MarketSnapshot
+from core.logger import logger
 
 
 class MarketSnapshotRepository:
@@ -47,6 +47,40 @@ class MarketSnapshotRepository:
             .first()
         )
 
+    def is_changed(
+        self,
+        item_id: int,
+        price: float,
+        sell_listing: int
+    ):
+
+        latest = self.get_latest_by_item_id(
+            item_id
+        )
+
+        # Belum pernah punya snapshot
+        if latest is None:
+            return True
+
+
+        logger.info(
+            f"""
+    CHECK SNAPSHOT
+    Item ID       : {item_id}
+    Old Price     : {latest.price}
+    New Price     : {price}
+    Old Listing   : {latest.sell_listing}
+    New Listing   : {sell_listing}
+    """
+        )
+
+
+        return (
+            latest.price != price
+            or
+            latest.sell_listing != sell_listing
+        )
+
     def get_history_by_item_id(
         self,
         item_id: int
@@ -62,3 +96,4 @@ class MarketSnapshotRepository:
             )
             .all()
         )
+    

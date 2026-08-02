@@ -3,7 +3,6 @@ from database.market_snapshot_repository import MarketSnapshotRepository
 
 
 def test_create_snapshot(db_session):
-
     item_repo = ItemRepository(
         db_session
     )
@@ -35,7 +34,6 @@ def test_create_snapshot(db_session):
     assert snapshot.volume == 120
 
 def test_get_history_by_item_id(db_session):
-
     item_repo = ItemRepository(
         db_session
     )
@@ -66,3 +64,63 @@ def test_get_history_by_item_id(db_session):
     assert len(history) == 2
     assert history[0].price == 1200
     assert history[1].price == 1300
+
+def test_snapshot_not_changed(db_session):
+    from database.item_repository import ItemRepository
+    from database.market_snapshot_repository import MarketSnapshotRepository
+
+    item_repo = ItemRepository(
+        db_session
+    )
+
+    snapshot_repo = MarketSnapshotRepository(
+        db_session
+    )
+
+    item = item_repo.create(
+        steam_name="Iron Ore",
+        market_hash_name="Iron Ore"
+    )
+
+    snapshot_repo.create(
+        item_id=item.id,
+        price=1200,
+        sell_listing=50
+    )
+
+    changed = snapshot_repo.is_changed(
+        item_id=item.id,
+        price=1200,
+        sell_listing=50
+    )
+
+    assert changed is False
+
+def test_snapshot_changed(db_session):
+    item_repo = ItemRepository(
+        db_session
+    )
+
+    snapshot_repo = MarketSnapshotRepository(
+        db_session
+    )
+
+    item = item_repo.create(
+        steam_name="Empire Coin",
+        market_hash_name="Empire Coin"
+    )
+
+    snapshot_repo.create(
+        item_id=item.id,
+        price=1200,
+        sell_listing=50
+    )
+
+    changed = snapshot_repo.is_changed(
+        item_id=item.id,
+        price=1300,
+        sell_listing=50
+    )
+
+    assert changed is True
+    

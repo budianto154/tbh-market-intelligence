@@ -46,7 +46,6 @@ class Item(Base):
         back_populates="item"
     )
 
-
 class MarketSnapshot(Base):
     __tablename__ = "market_snapshot"
 
