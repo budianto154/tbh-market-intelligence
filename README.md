@@ -55,7 +55,7 @@ Current implemented features:
 
 ---
 
-## Episode 2 - Data Collection 🚧
+## Episode 2 - Data Collection ✅
 
 ### Scraper
 
@@ -79,13 +79,13 @@ Current implemented features:
 ### Workflow
 
 - [x] Scraper → Parser
-- [ ] Parser → ItemRepository
-- [ ] ItemRepository → SnapshotRepository
-- [ ] sync_market() selesai
+- [x] Parser → ItemRepository
+- [x] ItemRepository → SnapshotRepository
+- [x] sync_market()
 
 ---
 
-## Episode 3 - Historical Market Data
+## Episode 3 - Historical Market Data 🚧
 
 - [ ] Snapshot Market
 - [ ] Snapshot Scheduler
